@@ -29,15 +29,22 @@ function filterStrings(inputArray: (string | number | boolean)[]): string[] {
 
 
 // У вас є об'єкт, який може містити довільні властивості. Напишіть функцію, яка приймає цей об'єкт і повертає значення однієї з властивостей, якщо воно існує і має певний тип.
-function getValueFromObject<T>(
-  obj: Record<string, unknown>,
-  key: string,
-  expectedType: string
-): T | undefined {
+function getValueFromObject(obj: Record<string, unknown>, key: string, expectedType: string): any {
   if (key in obj && typeof obj[key] === expectedType) {
-    return obj[key] as T;
+    return obj[key];
   }
   return undefined;
+}
+const myObject: Record<string, unknown> = {
+  name: "Valentina",
+  age: 32,
+};
+
+const nameValue = getValueFromObject(myObject, "name", "string");
+if (nameValue !== undefined) {
+  console.log("Name meaning:", nameValue);
+} else {
+  console.log("Unable to retrieve name value");
 }
 
 
